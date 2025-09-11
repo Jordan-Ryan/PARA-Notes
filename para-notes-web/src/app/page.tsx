@@ -1,5 +1,6 @@
 import { AppShell } from '@/components/layout/AppShell';
 import { Button } from '@/components/ui/button';
+import { SetupRequired } from '@/components/features/auth/SetupRequired';
 import { 
   FolderOpen, 
   Target, 
@@ -15,6 +16,20 @@ import {
 } from 'lucide-react';
 
 export default function Home() {
+  // Check if Supabase is properly configured
+  const supabaseUrl = process.env['NEXT_PUBLIC_SUPABASE_URL'];
+  const supabaseAnonKey = process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY'];
+  
+  const isSupabaseConfigured = supabaseUrl && 
+    supabaseAnonKey && 
+    !supabaseUrl.includes('placeholder') && 
+    !supabaseAnonKey.includes('placeholder');
+
+  // Show setup required message if Supabase is not configured
+  if (!isSupabaseConfigured) {
+    return <SetupRequired />;
+  }
+
   return (
     <AppShell>
       <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">

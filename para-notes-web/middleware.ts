@@ -5,9 +5,21 @@ import type { NextRequest } from 'next/server';
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   
+  // Check if Supabase environment variables are properly configured
+  const supabaseUrl = process.env['NEXT_PUBLIC_SUPABASE_URL'];
+  const supabaseAnonKey = process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY'];
+  
+  // If environment variables are not properly configured, skip auth checks
+  if (!supabaseUrl || !supabaseAnonKey || 
+      supabaseUrl.includes('placeholder') || 
+      supabaseAnonKey.includes('placeholder')) {
+    console.warn('Supabase environment variables not properly configured. Skipping auth checks.');
+    return res;
+  }
+  
   const supabase = createServerClient(
-    process.env['NEXT_PUBLIC_SUPABASE_URL']!,
-    process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY']!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         get(name: string) {
@@ -31,9 +43,16 @@ export async function middleware(req: NextRequest) {
     }
   );
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  let session = null;
+  try {
+    const {
+      data: { session: authSession },
+    } = await supabase.auth.getSession();
+    session = authSession;
+  } catch (error) {
+    console.warn('Failed to get session from Supabase:', error);
+    // Continue without session if Supabase is unavailable
+  }
 
   // Protected routes that require authentication
   const protectedRoutes = ['/notes', '/projects', '/areas', '/resources', '/archive'];
