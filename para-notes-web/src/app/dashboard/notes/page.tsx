@@ -6,15 +6,12 @@ import { Button } from '@/components/ui/button';
 import { 
   Plus, 
   Search, 
-  Filter, 
   Grid, 
   List, 
   MoreVertical,
   Edit,
   Trash2,
   Archive,
-  Tag,
-  Calendar,
   Clock
 } from 'lucide-react';
 import Link from 'next/link';
