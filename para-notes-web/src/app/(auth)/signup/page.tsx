@@ -16,7 +16,7 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await signup({ email, password, fullName });
+    const result = await signup({ email, password, fullName, acceptTerms: true });
     if (result.success) router.push('/login?checkEmail=1');
   };
 
