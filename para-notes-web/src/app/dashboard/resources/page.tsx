@@ -13,14 +13,12 @@ import {
   Trash2,
   Archive,
   Tag,
-  Calendar,
   Clock,
   ExternalLink,
   BookOpen,
   FileText,
   Link as LinkIcon,
-  Star,
-  StarOff
+  Star
 } from 'lucide-react';
 import Link from 'next/link';
 

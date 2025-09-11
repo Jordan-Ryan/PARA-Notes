@@ -19,7 +19,7 @@ export const paraItemSchema = z.object({
   priority: z.enum(['low', 'medium', 'high']).default('medium'),
   dueDate: z.date().optional(),
   tags: z.array(z.string()).default([]),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const noteSchema = z.object({
@@ -30,7 +30,7 @@ export const noteSchema = z.object({
   tags: z.array(z.string()).max(10, 'Too many tags').default([]),
   isEncrypted: z.boolean().default(false),
   isPinned: z.boolean().default(false),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const userPreferencesSchema = z.object({
@@ -47,7 +47,7 @@ export const userPreferencesSchema = z.object({
     email: z.boolean().default(true),
     push: z.boolean().default(true),
     reminders: z.boolean().default(true),
-  }).default({}),
+  }),
 });
 
 export function validateEmail(email: string): boolean {

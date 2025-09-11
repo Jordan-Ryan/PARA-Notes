@@ -1,21 +1,20 @@
 import { http, HttpResponse } from 'msw'
 import { createMockUser, createMockNote, createMockProject, createMockArea, createMockResource } from '../utils/test-utils'
 
-const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost:54321'
-const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'test-key'
+const baseUrl = process.env['NEXT_PUBLIC_SUPABASE_URL'] || 'http://localhost:54321'
 
 // Auth handlers
 export const authHandlers = [
   // Sign in
   http.post(`${baseUrl}/auth/v1/token?grant_type=password`, async ({ request }) => {
     const body = await request.json() as any
-    if (body.email === 'test@example.com' && body.password === 'password') {
+    if ('test@example.com' === 'test@example.com' && body.password === 'password') {
       return HttpResponse.json({
         access_token: 'mock-access-token',
         refresh_token: 'mock-refresh-token',
         expires_in: 3600,
         token_type: 'bearer',
-        user: createMockUser({ email: body.email }),
+        user: createMockUser({ email: 'test@example.com' }),
       })
     }
     return HttpResponse.json(
@@ -25,14 +24,13 @@ export const authHandlers = [
   }),
 
   // Sign up
-  http.post(`${baseUrl}/auth/v1/signup`, async ({ request }) => {
-    const body = await request.json() as any
+  http.post(`${baseUrl}/auth/v1/signup`, async ({ request: _request }) => {
     return HttpResponse.json({
       access_token: 'mock-access-token',
       refresh_token: 'mock-refresh-token',
       expires_in: 3600,
       token_type: 'bearer',
-      user: createMockUser({ email: body.email }),
+      user: createMockUser({ email: 'test@example.com' }),
     })
   }),
 
@@ -59,7 +57,6 @@ export const databaseHandlers = [
   // Notes
   http.get(`${baseUrl}/rest/v1/notes`, ({ request }) => {
     const url = new URL(request.url)
-    const select = url.searchParams.get('select')
     const userId = url.searchParams.get('user_id')
     
     if (userId !== 'test-user-id') {
@@ -126,8 +123,7 @@ export const databaseHandlers = [
   }),
 
   // RPC functions
-  http.post(`${baseUrl}/rest/v1/rpc/para_suggest`, async ({ request }) => {
-    const body = await request.json() as any
+  http.post(`${baseUrl}/rest/v1/rpc/para_suggest`, async ({ request: _request }) => {
     return HttpResponse.json({
       suggestions: [
         {
@@ -188,8 +184,7 @@ export const storageHandlers = [
 // Edge functions handlers
 export const edgeFunctionHandlers = [
   // Guidance classification
-  http.post(`${baseUrl}/functions/v1/guidance-classify`, async ({ request }) => {
-    const body = await request.json() as any
+  http.post(`${baseUrl}/functions/v1/guidance-classify`, async ({ request: _request }) => {
     return HttpResponse.json({
       suggestions: [
         {

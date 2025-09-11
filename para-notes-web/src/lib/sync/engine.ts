@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { z } from 'zod';
 import type { StorageAdapter, QueueAdapter, SyncOperation, SyncEngineOptions, Conflict, MergeResult, SyncEntity, EntityType } from '@/types/sync';
 import { supabase } from '@/lib/supabase/client';
 
@@ -70,7 +69,7 @@ export class SyncEngineImpl {
 			return;
 		}
 		const payload = { ...op.data, id: op.entityId } as Record<string, unknown>;
-		const { error } = await supabase.from(table).upsert(payload, { onConflict: 'id' });
+          const { error } = await supabase.from(table).upsert(payload as any, { onConflict: 'id' });
 		if (error) throw error;
 	}
 
@@ -103,7 +102,7 @@ export class SyncEngineImpl {
 		// Use highest local version to delta pull
 		const latestNotes = await this.storage.list('note');
 		const latestItems = await this.storage.list('paraItem');
-		const maxVersion = Math.max(0, ...latestNotes.map(n => n.version ?? 0), ...latestItems.map(i => i.version ?? 0));
+                const maxVersion = Math.max(0, ...latestNotes.map(n => (n as any).version ?? 0), ...latestItems.map(i => (i as any).version ?? 0));
 		await this.pull(maxVersion);
 	}
 

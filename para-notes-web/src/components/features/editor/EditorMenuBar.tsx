@@ -35,7 +35,7 @@ export function EditorMenuBar({ editor }: Props) {
       <ToolbarButton label="H1" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} active={editor.isActive('heading', { level: 1 })}>H1</ToolbarButton>
       <ToolbarButton label="H2" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={editor.isActive('heading', { level: 2 })}>H2</ToolbarButton>
       <ToolbarButton label="Link" onClick={() => {
-        const previousUrl = editor.getAttributes('link').href;
+        const previousUrl = editor.getAttributes('link')['href'];
         const url = window.prompt('URL', previousUrl || '');
         if (url === null) return;
         if (url === '') {

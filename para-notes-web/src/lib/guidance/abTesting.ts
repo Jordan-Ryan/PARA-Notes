@@ -19,7 +19,7 @@ export function assignVariant(userId: string, experiment = 'guidance_scoring_v1'
     if (map[key]) return map[key];
     const h = hashString(key);
     const variants: ABTestVariant['variant'][] = ['A', 'B', 'C'];
-    const assigned: ABTestVariant = { experiment, variant: variants[h % variants.length], assignedAt: Date.now() };
+    const assigned: ABTestVariant = { experiment, variant: variants[h % variants.length]!, assignedAt: Date.now() };
     map[key] = assigned;
     if (typeof localStorage !== 'undefined') localStorage.setItem(AB_KEY, JSON.stringify(map));
     return assigned;

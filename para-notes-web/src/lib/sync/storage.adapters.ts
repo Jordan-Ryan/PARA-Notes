@@ -1,41 +1,34 @@
 import { db } from './db';
 import type { StorageAdapter } from '@/types/sync';
-import type { Note } from '@/types/notes';
-import type { ParaItem } from '@/types/para';
 
 const tableFor = (entityType: 'note' | 'paraItem') => {
 	return entityType === 'note' ? db.notes : db.paraItems;
 };
 
 export const indexedDbStorage: StorageAdapter = {
-	async get(entityType, id) {
-		// @ts-expect-error runtime table mapping
-		return await tableFor(entityType).get(id);
-	},
+  async get(entityType, id) {
+          return (await tableFor(entityType).get(id) || null) as any;
+  },
 
 	async list(entityType) {
-		// @ts-expect-error runtime table mapping
-		return await tableFor(entityType).toArray();
+		return await tableFor(entityType).toArray() as any;
 	},
 
 	async listSinceVersion(entityType, version) {
-		// @ts-expect-error runtime table mapping
-		return await tableFor(entityType).where('version').above(version).toArray();
+		return await tableFor(entityType).where('version').above(version).toArray() as any;
 	},
 
 	async upsert(entityType, entity) {
-		// @ts-expect-error runtime table mapping
-		await tableFor(entityType).put(entity);
+		await tableFor(entityType).put(entity as any);
 	},
 
 	async remove(entityType, id) {
-		// @ts-expect-error runtime table mapping
 		await tableFor(entityType).delete(id);
 	},
 
 	async getBaseVersion(entityType, id) {
 		const record = await db.baseVersions.get([entityType, id]);
-		return (record?.entity as Note | ParaItem | null) ?? null;
+		return (record?.entity as any) ?? null;
 	},
 
 	async saveBaseVersion(entityType, entity) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SyncStatus } from '@/components/features/sync/SyncStatus';
 import { Button } from '@/components/ui/button';
-import { Menu, Search, Bell, User, Settings, Command, Plus } from 'lucide-react';
+import { Menu, Search, Bell, User, Settings, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export interface TopBarProps {

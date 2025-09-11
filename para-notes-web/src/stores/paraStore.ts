@@ -126,13 +126,13 @@ export const useParaStore = create<ParaStore>()(
         }
       },
       updateProgress: (id, progress) => {
-        get().updateItem(id, { progress: Math.max(0, Math.min(100, progress)) });
+        get().updateItem(id, { progress: Math.max(0, Math.min(100, progress)) } as any);
       },
       markAsRead: (id) => {
-        get().updateItem(id, { isRead: true });
+        get().updateItem(id, { isRead: true } as any);
       },
       setRating: (id, rating) => {
-        get().updateItem(id, { rating: Math.max(1, Math.min(5, rating)) });
+        get().updateItem(id, { rating: Math.max(1, Math.min(5, rating)) } as any);
       },
     }),
     {

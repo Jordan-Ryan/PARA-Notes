@@ -4,7 +4,7 @@ import { marked } from 'marked';
 export function importMarkdown(editor: Editor, markdown: string) {
   // TipTap doesn't parse Markdown natively; simple approach via HTML
   const html = marked.parse(markdown);
-  editor.commands.setContent(html as string, false);
+  editor.commands.setContent(html as string);
 }
 
 export function exportMarkdown(editor: Editor): string {

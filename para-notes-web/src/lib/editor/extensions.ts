@@ -1,10 +1,9 @@
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
-import { LowlightPlugin } from '@tiptap/extension-code-block-lowlight';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
-import { lowlight } from 'lowlight';
-import Table from '@tiptap/extension-table';
+import { createLowlight } from 'lowlight';
+import { Table } from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
@@ -68,7 +67,7 @@ export function createBaseExtensions() {
       openOnClick: true,
     }),
     ImageExtension.configure({ inline: false, allowBase64: false }),
-    CodeBlockLowlight.configure({ lowlight }),
+    CodeBlockLowlight.configure({ lowlight: createLowlight() }),
     Table.configure({ resizable: true }),
     TableRow,
     TableHeader,

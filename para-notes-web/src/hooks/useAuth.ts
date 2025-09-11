@@ -22,12 +22,12 @@ export function useAuth() {
 
         if (session?.user) {
           setSession({
-            user: session.user as User,
+            user: session.user as unknown as User,
             accessToken: session.access_token,
             refreshToken: session.refresh_token,
             expiresAt: new Date(session.expires_at! * 1000),
           });
-          setUser(session.user as User);
+          setUser(session.user as unknown as User);
         }
       } catch (error) {
         setError(error instanceof Error ? error.message : 'An error occurred');
@@ -43,12 +43,12 @@ export function useAuth() {
       async (event, session) => {
         if (event === 'SIGNED_IN' && session?.user) {
           setSession({
-            user: session.user as User,
+            user: session.user as unknown as User,
             accessToken: session.access_token,
             refreshToken: session.refresh_token,
             expiresAt: new Date(session.expires_at! * 1000),
           });
-          setUser(session.user as User);
+          setUser(session.user as unknown as User);
         } else if (event === 'SIGNED_OUT') {
           clearAuth();
         }
@@ -74,9 +74,9 @@ export function useAuth() {
       }
 
       if (data.user) {
-        setUser(data.user as User);
+        setUser(data.user as unknown as User);
         setSession({
-          user: data.user as User,
+          user: data.user as unknown as User,
           accessToken: data.session!.access_token,
           refreshToken: data.session!.refresh_token,
           expiresAt: new Date(data.session!.expires_at! * 1000),
@@ -99,7 +99,7 @@ export function useAuth() {
       setLoading(true);
       setError(null);
 
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: credentials.email,
         password: credentials.password,
         options: {

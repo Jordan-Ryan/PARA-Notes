@@ -4,6 +4,7 @@ import type {
   GuidanceSuggestion,
   GuidanceRuleSet,
   ParaCategory,
+  GuidanceSignalSource,
 } from '@/types/guidance';
 import { loadRuleSet, mergeWithUserRules, scoreCategory } from './guidanceRules';
 
@@ -76,14 +77,14 @@ export async function classifyNote(input: ClassificationInput, userRules?: Parti
     .map((cat) => ({
       category: cat,
       confidence: { value: maxScore === 0 ? 0 : combinedScores[cat] / (maxScore || 1), reasons: reasons[cat] },
-      source: matches[cat].length > 0 ? 'keyword' : input.currentPath ? 'context' : 'rule',
+      source: (matches[cat].length > 0 ? 'keyword' : input.currentPath ? 'context' : 'rule') as GuidanceSignalSource,
       keywordsMatched: matches[cat],
     }))
     .sort((a, b) => b.confidence.value - a.confidence.value);
 
   return {
     suggestions,
-    best: suggestions[0],
+    best: suggestions[0] || { category: 'projects', confidence: { value: 0, reasons: [] }, source: 'rule' as GuidanceSignalSource, keywordsMatched: [] },
     allScores: (Object.keys(combinedScores) as ParaCategory[]).map((cat) => ({
       category: cat,
       score: combinedScores[cat],
@@ -101,7 +102,7 @@ export async function recordUserCorrection(params: {
   const key = `${params.userId ?? 'anon'}:${params.finalCategory}`;
   weights[key] = (weights[key] ?? 0) + 0.25;
   saveLearning(weights);
-  queueServerLearningEvent({ userId: params.userId, noteId: params.noteId, finalCategory: params.finalCategory });
+  queueServerLearningEvent({ userId: params.userId || '', noteId: params.noteId || '', finalCategory: params.finalCategory });
 }
 
 function queueServerLearningEvent(evt: { userId?: string; noteId?: string; finalCategory: ParaCategory }): void {

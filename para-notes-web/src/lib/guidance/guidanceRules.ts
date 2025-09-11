@@ -51,7 +51,7 @@ export function mergeWithUserRules(base: GuidanceRuleSet, user?: Partial<Guidanc
   return {
     keywordRules: [...base.keywordRules, ...(user.keywordRules ?? [])],
     contextRules: [...base.contextRules, ...(user.contextRules ?? [])],
-    userOverrides: user.userOverrides ?? base.userOverrides,
+    userOverrides: user.userOverrides || base.userOverrides || {},
   };
 }
 

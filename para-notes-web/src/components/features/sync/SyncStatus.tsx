@@ -6,7 +6,7 @@ import { useSyncStore } from '@/stores/syncStore';
 export function SyncStatus() {
 	const { isSyncing, lastSyncAt, pendingChanges, error } = useSyncStore();
 	const [online, setOnline] = useState<boolean>(true); // Start with true for consistent SSR
-	const [isHydrated, setIsHydrated] = useState(false);
+        const [, setIsHydrated] = useState(false);
 
 	useEffect(() => {
 		// Set the actual online status after hydration

@@ -11,7 +11,7 @@ export interface AppShellProps {
 
 const AppShell: React.FC<AppShellProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [, setIsDesktop] = useState(false);
   const pathname = usePathname();
 
   // Check if we're on desktop and auto-open sidebar

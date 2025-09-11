@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSyncStore } from '@/stores/syncStore';
 
 export function OfflineQueue() {
@@ -16,7 +16,7 @@ export function OfflineQueue() {
 				<ul style={{ marginTop: 8 }}>
 					{pendingChanges.map((c) => (
 						<li key={c.id}>
-							{c.operationType ?? c.type} {c.entityType} {c.entityId} retries:{c.retryCount}
+                                                        {c.type} {c.entityType} {c.entityId} retries:{c.retryCount}
 						</li>
 					))}
 				</ul>

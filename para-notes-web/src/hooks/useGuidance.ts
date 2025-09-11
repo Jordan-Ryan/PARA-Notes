@@ -25,7 +25,7 @@ export function useGuidance(input: ClassificationInput, options?: { userRules?: 
       if (cancelled) return;
       setResult(local);
       if (local.best) {
-        trackGuidanceEvent({ name: 'guidance_suggestion_served', timestamp: Date.now(), userId: input.userId, noteId: input.noteId, properties: { category: local.best.category, confidence: local.best.confidence.value, source: local.best.source } });
+        trackGuidanceEvent({ name: 'guidance_suggestion_served', timestamp: Date.now(), userId: input.userId || '', noteId: input.noteId || '', properties: { category: local.best.category, confidence: local.best.confidence.value, source: local.best.source } });
       }
       if (options?.enableServerFallback) {
         try {
@@ -44,13 +44,13 @@ export function useGuidance(input: ClassificationInput, options?: { userRules?: 
 
   const accept = useMemo(() => async (category: ParaCategory) => {
     if (!result?.best) return;
-    trackGuidanceEvent({ name: 'guidance_suggestion_accepted', timestamp: Date.now(), userId: input.userId, noteId: input.noteId, properties: { category, confidence: result.best.confidence.value, source: result.best.source } });
-    await recordUserCorrection({ userId: input.userId, noteId: input.noteId, finalCategory: category });
+    trackGuidanceEvent({ name: 'guidance_suggestion_accepted', timestamp: Date.now(), userId: input.userId || '', noteId: input.noteId || '', properties: { category, confidence: result.best.confidence.value, source: result.best.source } });
+    await recordUserCorrection({ userId: input.userId || '', noteId: input.noteId || '', finalCategory: category });
   }, [result?.best, input.userId, input.noteId]);
 
   const reject = useMemo(() => async (category: ParaCategory) => {
     if (!result?.best) return;
-    trackGuidanceEvent({ name: 'guidance_suggestion_rejected', timestamp: Date.now(), userId: input.userId, noteId: input.noteId, properties: { category, confidence: result.best.confidence.value, source: result.best.source } });
+    trackGuidanceEvent({ name: 'guidance_suggestion_rejected', timestamp: Date.now(), userId: input.userId || '', noteId: input.noteId || '', properties: { category, confidence: result.best.confidence.value, source: result.best.source } });
   }, [result?.best, input.userId, input.noteId]);
 
   return { result, accept, reject };

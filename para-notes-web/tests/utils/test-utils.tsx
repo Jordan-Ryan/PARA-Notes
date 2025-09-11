@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { createClient } from '@supabase/supabase-js'
-import { AuthProvider } from '@/app/AuthProvider'
+import AuthProvider from '@/app/AuthProvider'
 
 // Create a custom render function that includes providers
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
@@ -10,7 +9,7 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
     defaultOptions: {
       queries: {
         retry: false,
-        cacheTime: 0,
+        gcTime: 0,
       },
       mutations: {
         retry: false,
@@ -18,14 +17,10 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
     },
   })
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost:54321',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'test-key'
-  )
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider supabase={supabase}>
+      <AuthProvider>
         {children}
       </AuthProvider>
     </QueryClientProvider>

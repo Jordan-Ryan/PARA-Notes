@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env['NEXT_PUBLIC_APP_URL'] || 'http://localhost:3000'),
   openGraph: {
     title: "PARA Notes - Organize Your Life",
     description: "A note-taking app organized around the PARA method for better productivity and organization",
-    url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    url: process.env['NEXT_PUBLIC_APP_URL'] || 'http://localhost:3000',
     siteName: "PARA Notes",
     locale: "en_US",
     type: "website",

@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import type { Note, ParaItem } from '@/types/notes';
-import type { ParaItem as ParaItemType } from '@/types/para';
+import type { Note } from '@/types/notes';
 
 interface SyncState {
   isOnline: boolean;
@@ -16,7 +15,7 @@ interface PendingChange {
   type: 'create' | 'update' | 'delete';
   entityType: 'note' | 'paraItem';
   entityId: string;
-  data: Partial<Note | ParaItemType>;
+  data: Partial<Note | any>;
   timestamp: Date;
   retryCount: number;
 }
@@ -25,8 +24,8 @@ interface Conflict {
   id: string;
   entityType: 'note' | 'paraItem';
   entityId: string;
-  localVersion: Note | ParaItemType;
-  remoteVersion: Note | ParaItemType;
+  localVersion: Note | any;
+  remoteVersion: Note | any;
   timestamp: Date;
   resolved: boolean;
 }
@@ -92,7 +91,7 @@ export const useSyncStore = create<SyncStore>()((set, get) => ({
     };
     set({ conflicts: [...conflicts, newConflict] });
   },
-  resolveConflict: (id, resolution) => {
+  resolveConflict: (id, _resolution) => {
     const { conflicts } = get();
     const updatedConflicts = conflicts.map((conflict) =>
       conflict.id === id ? { ...conflict, resolved: true } : conflict

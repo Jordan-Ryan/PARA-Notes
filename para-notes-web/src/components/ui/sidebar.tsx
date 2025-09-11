@@ -8,7 +8,6 @@ import {
   BookOpen, 
   Archive, 
   Settings,
-  Menu,
   X
 } from 'lucide-react';
 

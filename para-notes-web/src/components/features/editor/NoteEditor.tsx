@@ -43,10 +43,10 @@ export function NoteEditor({
 
   const editor = useEditor({
     extensions: createBaseExtensions(),
-    content: initialMarkdown ? undefined : (initialContent ?? '<p></p>'),
+    content: initialMarkdown ? '<p></p>' : (initialContent || '<p></p>'),
     editorProps: {
       attributes: { 'aria-label': 'Note editor', class: 'prose max-w-none focus:outline-none p-4' },
-      handlePaste: (view, event) => {
+      handlePaste: (_view, _event) => {
         // Future: detect URLs and auto-link
         return false;
       },

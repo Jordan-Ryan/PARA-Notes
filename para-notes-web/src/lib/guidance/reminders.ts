@@ -10,7 +10,7 @@ export function computeAreaReviewReminders(areas: Array<{ id: string; name: stri
   return areas.map((a) => ({
     areaId: a.id,
     areaName: a.name,
-    lastReviewedAt: a.lastReviewedAt,
+    lastReviewedAt: a.lastReviewedAt || 0,
     recommendedNextReviewAt: (a.lastReviewedAt ?? now) + cadenceDays * 24 * 60 * 60 * 1000,
   }));
 }

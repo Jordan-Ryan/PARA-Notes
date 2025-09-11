@@ -3,11 +3,11 @@ export const APP_CONFIG = {
   description: 'A note-taking app organized around the PARA method',
   version: '1.0.0',
   author: 'Your Name',
-  url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  url: process.env['NEXT_PUBLIC_APP_URL'] || 'http://localhost:3000',
 } as const;
 
 export const API_CONFIG = {
-  baseUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  baseUrl: process.env['NEXT_PUBLIC_APP_URL'] || 'http://localhost:3000',
   timeout: 30000, // 30 seconds
   retryAttempts: 3,
   retryDelay: 1000, // 1 second
