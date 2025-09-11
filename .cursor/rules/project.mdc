@@ -1,0 +1,111 @@
+# PARA Notes App - Cursor Rules Configuration
+# Cross-platform note-taking app with PARA methodology guidance
+# Stack: Next.js 14, React Native, Supabase, Vercel
+
+## Project Context
+You are building a cross-platform note-taking application that automatically implements the PARA (Projects, Areas, Resources, Archive) organizational method with intelligent guidance. The app targets users who struggle with note organization across web, iPad, and iPhone platforms.
+
+## Technology Stack
+- Frontend Web: Next.js 14 (App Router), TypeScript, React 18, TipTap editor
+- Frontend Mobile: React Native (Expo), React Navigation
+- Backend: Supabase (Postgres, Auth, Realtime, Storage)
+- Deployment: Vercel (web), Expo (mobile)
+- State: Zustand + React Query
+- Database: PostgreSQL with Row Level Security (RLS)
+- Security: Optional client-side E2EE with WebCrypto/libsodium
+
+## Architecture Principles
+1. **Local-first**: Offline capability with optimistic updates
+2. **RLS-first**: All data access through Supabase RLS policies
+3. **PARA-guided**: Intelligent content placement suggestions
+4. **Cross-platform**: Shared business logic, platform-specific UI
+5. **Progressive**: Simple MVP, advanced features for power users
+
+## Code Style Guidelines
+- Use TypeScript strict mode
+- Prefer composition over inheritance
+- Use descriptive variable names (paraCategory, notePlacementSuggestion)
+- Follow Next.js 14 App Router conventions
+- Use React Server Components where appropriate
+- Implement proper error boundaries and loading states
+
+## Database Patterns
+- All tables must have RLS policies with user_id = auth.uid()
+- Use UUIDs for primary keys
+- Prefix all RPC functions with app-specific namespace
+- Always include created_at, updated_at columns
+- Use JSONB for flexible metadata (settings, templates)
+
+## Security Requirements
+- Never expose private keys or sensitive data
+- Always validate user input on both client and server
+- Use Supabase RLS for all data access
+- Implement proper CORS and CSP headers
+- Store encryption keys only on device (when E2EE enabled)
+
+## Component Patterns
+- Create reusable UI components in /components/ui/
+- Business logic components in /components/features/
+- Use custom hooks for data fetching and state management
+- Implement proper loading and error states
+- Follow accessibility guidelines (ARIA labels, keyboard navigation)
+
+## File Naming Conventions
+- Components: PascalCase (NoteEditor.tsx)
+- Hooks: camelCase with 'use' prefix (useParaGuidance.ts)
+- Utils: camelCase (paraClassifier.ts)
+- Types: PascalCase (ParaCategory.ts)
+- Constants: UPPER_SNAKE_CASE (PARA_CATEGORIES.ts)
+
+## Testing Priorities
+1. RLS policies and security boundaries
+2. PARA guidance algorithms
+3. Offline sync and conflict resolution
+4. Cross-platform component compatibility
+5. E2E user flows (onboarding, note creation, sync)
+
+## Performance Guidelines
+- Implement virtualization for large note lists
+- Use React.memo for expensive components
+- Lazy load non-critical features
+- Optimize bundle size with dynamic imports
+- Cache Supabase queries with React Query
+
+## Error Handling
+- Always provide user-friendly error messages
+- Log errors to monitoring service (preserve privacy)
+- Implement retry logic for network operations
+- Graceful degradation when offline
+- Clear error boundaries with recovery options
+
+## Specific Patterns to Follow
+- Para Category: Always use enum type ParaCategory
+- Note Content: Support both plain and encrypted content
+- Folder Paths: Use ltree or computed paths for hierarchy
+- Realtime: Subscribe at user level with proper cleanup
+- Attachments: Use Supabase Storage with signed URLs
+
+## Anti-Patterns to Avoid
+- Don't hardcode Supabase URLs or keys in components
+- Don't bypass RLS policies in any circumstance
+- Don't store sensitive data in localStorage
+- Don't create circular dependencies between modules
+- Don't ignore TypeScript errors or use 'any' type
+- Don't mutate props or state directly
+- Don't forget to handle loading and error states
+
+## Import Organization
+1. React/Next.js imports
+2. Third-party libraries
+3. Internal components (absolute paths)
+4. Types and interfaces
+5. Utilities and constants
+6. Relative imports (same directory)
+
+When generating code, always consider:
+- Cross-platform compatibility
+- Offline-first behavior  
+- PARA methodology compliance
+- Security and privacy
+- Performance and scalability
+- User experience and accessibility
