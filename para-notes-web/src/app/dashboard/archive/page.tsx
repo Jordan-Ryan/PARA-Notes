@@ -5,7 +5,6 @@ import { AppShell } from '@/components/layout/AppShell';
 import { Button } from '@/components/ui/button';
 import { 
   Search, 
-  Filter, 
   Grid, 
   List, 
   MoreVertical,
