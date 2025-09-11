@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { 
   Plus, 
   Search, 
-  Filter, 
   Grid, 
   List, 
   MoreVertical,
