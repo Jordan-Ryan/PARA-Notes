@@ -19,9 +19,9 @@ export default function AuthProvider({ children }: Props) {
       const { data: { session } } = await supabase.auth.getSession();
       if (!isMounted) return;
       if (session?.user) {
-        setUser(session.user as User);
+        setUser(session.user as unknown as User);
         setSession({
-          user: session.user as User,
+          user: session.user as unknown as User,
           accessToken: session.access_token,
           refreshToken: session.refresh_token,
           expiresAt: new Date(session.expires_at! * 1000),
@@ -33,9 +33,9 @@ export default function AuthProvider({ children }: Props) {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
-        setUser(session.user as User);
+        setUser(session.user as unknown as User);
         setSession({
-          user: session.user as User,
+          user: session.user as unknown as User,
           accessToken: session.access_token,
           refreshToken: session.refresh_token,
           expiresAt: new Date(session.expires_at! * 1000),
