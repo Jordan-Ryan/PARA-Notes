@@ -207,8 +207,8 @@ export default function ResourcesPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Resources</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-3xl font-bold text-gray-900">Resources</h1>
+            <p className="text-gray-600">
               {filteredResources.length} of {totalResources} resources
             </p>
           </div>
@@ -236,8 +236,8 @@ export default function ResourcesPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Resources</p>
-                <p className="text-2xl font-bold text-foreground">{totalResources}</p>
+                <p className="text-sm font-medium text-gray-600">Total Resources</p>
+                <p className="text-2xl font-bold text-gray-900">{totalResources}</p>
               </div>
               <BookOpen className="h-8 w-8 text-para-resources-500" />
             </div>
@@ -246,8 +246,8 @@ export default function ResourcesPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Favorites</p>
-                <p className="text-2xl font-bold text-foreground">{favoriteResources}</p>
+                <p className="text-sm font-medium text-gray-600">Favorites</p>
+                <p className="text-2xl font-bold text-gray-900">{favoriteResources}</p>
               </div>
               <Star className="h-8 w-8 text-yellow-500" />
             </div>
@@ -256,10 +256,10 @@ export default function ResourcesPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Tags</p>
-                <p className="text-2xl font-bold text-foreground">{allTags.length}</p>
+                <p className="text-sm font-medium text-gray-600">Tags</p>
+                <p className="text-2xl font-bold text-gray-900">{allTags.length}</p>
               </div>
-              <Tag className="h-8 w-8 text-muted-foreground" />
+              <Tag className="h-8 w-8 text-gray-600" />
             </div>
           </div>
         </div>
@@ -267,20 +267,20 @@ export default function ResourcesPage() {
         {/* Search and Filters */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
             <input
               type="text"
               placeholder="Search resources..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
           
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+            className="px-3 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <option value="all">All Types</option>
             <option value="book">Books</option>
@@ -295,7 +295,7 @@ export default function ResourcesPage() {
           <select
             value={tagFilter}
             onChange={(e) => setTagFilter(e.target.value)}
-            className="px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+            className="px-3 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <option value="all">All Tags</option>
             {allTags.map(tag => (
@@ -307,7 +307,7 @@ export default function ResourcesPage() {
         {/* Resources Grid/List */}
         {filteredResources.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-muted-foreground mb-4">
+            <div className="text-gray-600 mb-4">
               {searchQuery ? 'No resources found matching your search.' : 'No resources yet.'}
             </div>
             <Link href="/dashboard/resources/new">
@@ -346,16 +346,16 @@ export default function ResourcesPage() {
                       </Button>
                     </div>
                     
-                    <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
                       {resource.title}
                     </h3>
                     
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                       {resource.description}
                     </p>
                     
                     {resource.notes && (
-                      <p className="text-xs text-muted-foreground mb-4 line-clamp-2 italic">
+                      <p className="text-xs text-gray-600 mb-4 line-clamp-2 italic">
                         "{resource.notes}"
                       </p>
                     )}
@@ -364,19 +364,19 @@ export default function ResourcesPage() {
                       {resource.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded"
+                          className="px-2 py-1 text-xs bg-muted text-gray-600 rounded"
                         >
                           {tag}
                         </span>
                       ))}
                       {resource.tags.length > 3 && (
-                        <span className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">
+                        <span className="px-2 py-1 text-xs bg-muted text-gray-600 rounded">
                           +{resource.tags.length - 3}
                         </span>
                       )}
                     </div>
                     
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <div className="flex items-center justify-between text-xs text-gray-600">
                       <div className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
                         {resource.lastAccessedAt ? formatDate(resource.lastAccessedAt) : 'Never accessed'}
@@ -407,7 +407,7 @@ export default function ResourcesPage() {
                   <>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-foreground">{resource.title}</h3>
+                        <h3 className="font-semibold text-gray-900">{resource.title}</h3>
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${getTypeColor(resource.type)}`}>
                           {getTypeIcon(resource.type)}
                           <span className="ml-1 capitalize">{resource.type}</span>
@@ -416,10 +416,10 @@ export default function ResourcesPage() {
                           <Star className="h-4 w-4 text-yellow-500 fill-current" />
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2 line-clamp-1">
+                      <p className="text-sm text-gray-600 mb-2 line-clamp-1">
                         {resource.description}
                       </p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-4 text-xs text-gray-600">
                         <div className="flex items-center gap-1">
                           <Clock className="h-3 w-3" />
                           {resource.lastAccessedAt ? formatDate(resource.lastAccessedAt) : 'Never accessed'}
@@ -449,7 +449,7 @@ export default function ResourcesPage() {
                           href={resource.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 text-muted-foreground hover:text-foreground"
+                          className="p-2 text-gray-600 hover:text-gray-900"
                         >
                           <ExternalLink className="h-4 w-4" />
                         </a>

@@ -48,18 +48,18 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidebar */}
       <div
         className={cn(
-          'fixed left-0 top-0 z-50 h-full w-72 transform bg-white/95 backdrop-blur-xl border-r border-border transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0',
+          'fixed left-0 top-0 z-50 h-full w-72 transform bg-white/95 backdrop-blur-xl border-r border-gray-200 transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0',
           isOpen ? 'translate-x-0' : '-translate-x-full',
           className
         )}
       >
         {/* Header */}
-        <div className="flex h-16 items-center justify-between px-6 border-b border-border">
+        <div className="flex h-16 items-center justify-between px-6 border-b border-gray-200">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-primary/10">
               <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/70 rounded-md"></div>
             </div>
-            <h1 className="text-xl font-bold text-foreground">PARA Notes</h1>
+            <h1 className="text-xl font-bold text-gray-900">PARA Notes</h1>
           </div>
           <Button
             variant="ghost"
@@ -95,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   >
                     <Icon className={cn(
                       "mr-3 h-5 w-5 transition-colors",
-                      isActive ? "text-primary" : "text-muted-foreground group-hover:text-accent-foreground"
+                      isActive ? "text-primary" : "text-gray-600 group-hover:text-accent-foreground"
                     )} />
                     <span className="font-medium">{item.name}</span>
                     {isActive && (
@@ -109,14 +109,14 @@ const Sidebar: React.FC<SidebarProps> = ({
         </nav>
         
         {/* Footer */}
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-gray-200">
           <div className="flex items-center justify-between">
-            <div className="text-xs text-muted-foreground">
+            <div className="text-xs text-gray-600">
               PARA Notes v1.0.0
             </div>
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-xs text-muted-foreground">Online</span>
+              <span className="text-xs text-gray-600">Online</span>
             </div>
           </div>
         </div>

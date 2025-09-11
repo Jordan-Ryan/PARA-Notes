@@ -195,8 +195,8 @@ export default function ArchivePage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Archive</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-3xl font-bold text-gray-900">Archive</h1>
+            <p className="text-gray-600">
               {filteredItems.length} of {totalItems} archived items
             </p>
           </div>
@@ -217,8 +217,8 @@ export default function ArchivePage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Total</p>
-                <p className="text-2xl font-bold text-foreground">{totalItems}</p>
+                <p className="text-sm font-medium text-gray-600">Total</p>
+                <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
               </div>
               <Archive className="h-8 w-8 text-para-archive-500" />
             </div>
@@ -227,8 +227,8 @@ export default function ArchivePage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Notes</p>
-                <p className="text-2xl font-bold text-foreground">{notesCount}</p>
+                <p className="text-sm font-medium text-gray-600">Notes</p>
+                <p className="text-2xl font-bold text-gray-900">{notesCount}</p>
               </div>
               <FileText className="h-8 w-8 text-blue-500" />
             </div>
@@ -237,8 +237,8 @@ export default function ArchivePage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Projects</p>
-                <p className="text-2xl font-bold text-foreground">{projectsCount}</p>
+                <p className="text-sm font-medium text-gray-600">Projects</p>
+                <p className="text-2xl font-bold text-gray-900">{projectsCount}</p>
               </div>
               <FolderOpen className="h-8 w-8 text-para-projects-500" />
             </div>
@@ -247,8 +247,8 @@ export default function ArchivePage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Areas</p>
-                <p className="text-2xl font-bold text-foreground">{areasCount}</p>
+                <p className="text-sm font-medium text-gray-600">Areas</p>
+                <p className="text-2xl font-bold text-gray-900">{areasCount}</p>
               </div>
               <BookOpen className="h-8 w-8 text-para-areas-500" />
             </div>
@@ -257,8 +257,8 @@ export default function ArchivePage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Resources</p>
-                <p className="text-2xl font-bold text-foreground">{resourcesCount}</p>
+                <p className="text-sm font-medium text-gray-600">Resources</p>
+                <p className="text-2xl font-bold text-gray-900">{resourcesCount}</p>
               </div>
               <BookOpen className="h-8 w-8 text-para-resources-500" />
             </div>
@@ -268,20 +268,20 @@ export default function ArchivePage() {
         {/* Search and Filters */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
             <input
               type="text"
               placeholder="Search archived items..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
           
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+            className="px-3 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <option value="all">All Types</option>
             <option value="note">Notes</option>
@@ -294,10 +294,10 @@ export default function ArchivePage() {
         {/* Archived Items Grid/List */}
         {filteredItems.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-muted-foreground mb-4">
+            <div className="text-gray-600 mb-4">
               {searchQuery ? 'No archived items found matching your search.' : 'No archived items yet.'}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-600">
               Items are automatically archived when projects are completed or areas are replaced.
             </p>
           </div>
@@ -330,36 +330,36 @@ export default function ArchivePage() {
                       </Button>
                     </div>
                     
-                    <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
                       {item.title}
                     </h3>
                     
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                       {item.content}
                     </p>
                     
                     <div className="bg-muted rounded-lg p-3 mb-4">
-                      <div className="text-xs text-muted-foreground mb-1">Archived Reason</div>
-                      <div className="text-sm text-foreground">{item.archivedReason}</div>
+                      <div className="text-xs text-gray-600 mb-1">Archived Reason</div>
+                      <div className="text-sm text-gray-900">{item.archivedReason}</div>
                     </div>
                     
                     <div className="flex flex-wrap gap-1 mb-4">
                       {item.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded"
+                          className="px-2 py-1 text-xs bg-muted text-gray-600 rounded"
                         >
                           {tag}
                         </span>
                       ))}
                       {item.tags.length > 3 && (
-                        <span className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">
+                        <span className="px-2 py-1 text-xs bg-muted text-gray-600 rounded">
                           +{item.tags.length - 3}
                         </span>
                       )}
                     </div>
                     
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <div className="flex items-center justify-between text-xs text-gray-600">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         Archived {formatDate(item.archivedAt)}
@@ -378,7 +378,7 @@ export default function ArchivePage() {
                   <>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-foreground">{item.title}</h3>
+                        <h3 className="font-semibold text-gray-900">{item.title}</h3>
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${getTypeColor(item.type)}`}>
                           {getTypeIcon(item.type)}
                           <span className="ml-1 capitalize">{item.type}</span>
@@ -387,15 +387,15 @@ export default function ArchivePage() {
                           {item.originalFolder}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2 line-clamp-1">
+                      <p className="text-sm text-gray-600 mb-2 line-clamp-1">
                         {item.content}
                       </p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-4 text-xs text-gray-600">
                         <div className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
                           Archived {formatDate(item.archivedAt)}
                         </div>
-                        <div className="text-muted-foreground">
+                        <div className="text-gray-600">
                           {item.archivedReason}
                         </div>
                         <div className="flex gap-1">

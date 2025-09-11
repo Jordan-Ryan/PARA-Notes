@@ -124,7 +124,7 @@
 
   /* Modern card styles */
   .card-modern {
-    @apply bg-white border border-border rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
   }
 
   .card-interactive {
@@ -159,7 +159,7 @@
 
   /* Modern sidebar styles */
   .sidebar-modern {
-    @apply bg-white border-r border-border h-full w-64 flex flex-col;
+    @apply bg-white border-r border-gray-200 h-full w-64 flex flex-col;
   }
 
   .sidebar-item {
@@ -172,7 +172,7 @@
 
   /* Modern navigation styles */
   .nav-modern {
-    @apply flex items-center justify-between h-16 px-4 border-b border-border bg-white;
+    @apply flex items-center justify-between h-16 px-4 border-b border-gray-200 bg-white;
   }
 
   /* Modern search styles */

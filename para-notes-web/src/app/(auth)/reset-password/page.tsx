@@ -33,11 +33,11 @@ export default function ResetPasswordPage() {
         <form className="space-y-4" onSubmit={onSubmit}>
           <label className="block text-sm">
             New password
-            <input className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input className="mt-1 block w-full rounded-md border border-gray-300 bg-background px-3 py-2" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           </label>
           <label className="block text-sm">
             Confirm password
-            <input className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2" type="password" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+            <input className="mt-1 block w-full rounded-md border border-gray-300 bg-background px-3 py-2" type="password" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
           </label>
           {error && <p className="text-sm text-destructive">{error}</p>}
           {success && <p className="text-sm text-emerald-600">Password updated. You can close this tab.</p>}

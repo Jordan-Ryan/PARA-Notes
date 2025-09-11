@@ -97,12 +97,12 @@ const Modal: React.FC<ModalProps> = ({
           <div className="flex items-center justify-between p-6 border-b">
             <div>
               {title && (
-                <h2 className="text-lg font-semibold text-foreground">
+                <h2 className="text-lg font-semibold text-gray-900">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-sm text-gray-600 mt-1">
                   {description}
                 </p>
               )}

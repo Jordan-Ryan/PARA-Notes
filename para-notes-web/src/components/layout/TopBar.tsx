@@ -19,7 +19,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-border bg-white/95 backdrop-blur-xl px-4 lg:px-6">
+    <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white/95 backdrop-blur-xl px-4 lg:px-6">
       <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
@@ -31,7 +31,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
         </Button>
         
         <div className="hidden lg:block">
-          <h1 className="text-lg font-semibold text-foreground">
+          <h1 className="text-lg font-semibold text-gray-900">
             Dashboard
           </h1>
         </div>
@@ -50,7 +50,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
               className="search-input"
             />
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
-              <kbd className="px-2 py-1 text-xs font-medium text-muted-foreground bg-muted/50 border border-border rounded-md">
+              <kbd className="px-2 py-1 text-xs font-medium text-gray-600 bg-muted/50 border border-gray-200 rounded-md">
                 ⌘K
               </kbd>
             </div>
@@ -109,10 +109,10 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
 
       {/* Mobile Search Overlay */}
       {showSearch && (
-        <div className="lg:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-border p-4 z-50">
+        <div className="lg:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-gray-200 p-4 z-50">
           <form onSubmit={handleSearch}>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
               <input
                 type="text"
                 placeholder="Search notes, projects, areas..."

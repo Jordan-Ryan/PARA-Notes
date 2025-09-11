@@ -173,8 +173,8 @@ export default function AreasPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Areas</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-3xl font-bold text-gray-900">Areas</h1>
+            <p className="text-gray-600">
               {filteredAreas.length} of {areas.length} areas
             </p>
           </div>
@@ -192,8 +192,8 @@ export default function AreasPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Areas</p>
-                <p className="text-2xl font-bold text-foreground">{totalAreas}</p>
+                <p className="text-sm font-medium text-gray-600">Total Areas</p>
+                <p className="text-2xl font-bold text-gray-900">{totalAreas}</p>
               </div>
               <BookOpen className="h-8 w-8 text-para-areas-500" />
             </div>
@@ -202,8 +202,8 @@ export default function AreasPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Overdue Reviews</p>
-                <p className="text-2xl font-bold text-foreground">{overdueAreas}</p>
+                <p className="text-sm font-medium text-gray-600">Overdue Reviews</p>
+                <p className="text-2xl font-bold text-gray-900">{overdueAreas}</p>
               </div>
               <AlertCircle className="h-8 w-8 text-red-500" />
             </div>
@@ -212,8 +212,8 @@ export default function AreasPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Due Soon</p>
-                <p className="text-2xl font-bold text-foreground">{dueSoonAreas}</p>
+                <p className="text-sm font-medium text-gray-600">Due Soon</p>
+                <p className="text-2xl font-bold text-gray-900">{dueSoonAreas}</p>
               </div>
               <Clock className="h-8 w-8 text-orange-500" />
             </div>
@@ -222,8 +222,8 @@ export default function AreasPage() {
           <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">On Track</p>
-                <p className="text-2xl font-bold text-foreground">{totalAreas - overdueAreas - dueSoonAreas}</p>
+                <p className="text-sm font-medium text-gray-600">On Track</p>
+                <p className="text-2xl font-bold text-gray-900">{totalAreas - overdueAreas - dueSoonAreas}</p>
               </div>
               <TrendingUp className="h-8 w-8 text-green-500" />
             </div>
@@ -233,13 +233,13 @@ export default function AreasPage() {
         {/* Search */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
             <input
               type="text"
               placeholder="Search areas..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
         </div>
@@ -247,7 +247,7 @@ export default function AreasPage() {
         {/* Areas List */}
         {filteredAreas.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-muted-foreground mb-4">
+            <div className="text-gray-600 mb-4">
               {searchQuery ? 'No areas found matching your search.' : 'No areas yet.'}
             </div>
             <Link href="/dashboard/areas/new">
@@ -268,16 +268,16 @@ export default function AreasPage() {
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold text-foreground">{area.name}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{area.name}</h3>
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${reviewStatus.bgColor} ${reviewStatus.color}`}>
                           {reviewStatus.status === 'overdue' ? 'Overdue' :
                            reviewStatus.status === 'due-soon' ? 'Due Soon' :
                            reviewStatus.status === 'upcoming' ? 'Upcoming' : 'On Track'}
                         </span>
                       </div>
-                      <p className="text-muted-foreground mb-4">{area.description}</p>
+                      <p className="text-gray-600 mb-4">{area.description}</p>
                       
-                      <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center gap-6 text-sm text-gray-600 mb-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="h-4 w-4" />
                           {area.lastReviewedAt ? `Last reviewed ${formatDate(area.lastReviewedAt)}` : 'Never reviewed'}
@@ -298,7 +298,7 @@ export default function AreasPage() {
                       
                       <div className="bg-muted rounded-lg p-3">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Next Review</span>
+                          <span className="text-gray-600">Next Review</span>
                           <span className={`font-medium ${reviewStatus.color}`}>
                             {area.isOverdue ? 'Overdue' : 
                              daysUntil === 0 ? 'Today' :
@@ -306,7 +306,7 @@ export default function AreasPage() {
                              `In ${daysUntil} days`}
                           </span>
                         </div>
-                        <div className="text-xs text-muted-foreground mt-1">
+                        <div className="text-xs text-gray-600 mt-1">
                           {formatDate(area.nextReviewAt)}
                         </div>
                       </div>

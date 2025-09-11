@@ -126,8 +126,8 @@ export default function NewNotePage() {
               </Button>
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">New Note</h1>
-              <p className="text-sm text-muted-foreground">
+              <h1 className="text-2xl font-bold text-gray-900">New Note</h1>
+              <p className="text-sm text-gray-600">
                 {hasUnsavedChanges ? 'Unsaved changes' : 'All changes saved'}
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function NewNotePage() {
         <div className="bg-white border rounded-lg p-6 space-y-6">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Title
             </label>
             <input
@@ -160,13 +160,13 @@ export default function NewNotePage() {
               value={formData.title}
               onChange={(e) => handleInputChange('title', e.target.value)}
               placeholder="Enter note title..."
-              className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring text-lg font-medium"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring text-lg font-medium"
             />
           </div>
 
           {/* Folder Selection */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Folder
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -177,7 +177,7 @@ export default function NewNotePage() {
                   className={`p-3 rounded-lg border text-sm font-medium transition-colors ${
                     formData.folder === folder.value
                       ? `${folder.color} border-current`
-                      : 'border-input hover:bg-muted'
+                      : 'border-gray-300 hover:bg-muted'
                   }`}
                 >
                   <FolderOpen className="h-4 w-4 mx-auto mb-1" />
@@ -189,7 +189,7 @@ export default function NewNotePage() {
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Tags
             </label>
             <div className="space-y-3">
@@ -200,7 +200,7 @@ export default function NewNotePage() {
                   onChange={(e) => setNewTag(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Add a tag..."
-                  className="flex-1 px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                 />
                 <Button onClick={handleAddTag} disabled={!newTag.trim()}>
                   <Tag className="h-4 w-4 mr-2" />
@@ -213,12 +213,12 @@ export default function NewNotePage() {
                   {formData.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center gap-1 px-2 py-1 bg-muted text-muted-foreground rounded-md text-sm"
+                      className="inline-flex items-center gap-1 px-2 py-1 bg-muted text-gray-600 rounded-md text-sm"
                     >
                       {tag}
                       <button
                         onClick={() => handleRemoveTag(tag)}
-                        className="hover:text-foreground"
+                        className="hover:text-gray-900"
                       >
                         ×
                       </button>
@@ -233,10 +233,10 @@ export default function NewNotePage() {
           <div className="border-t pt-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <label className="block text-sm font-medium text-gray-900">
                   Encryption
                 </label>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-gray-600">
                   Encrypt this note for additional security
                 </p>
               </div>
@@ -256,7 +256,7 @@ export default function NewNotePage() {
             
             {formData.isEncrypted && (
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Encryption Passphrase
                 </label>
                 <div className="relative">
@@ -265,17 +265,17 @@ export default function NewNotePage() {
                     value={formData.encryptionPassphrase}
                     onChange={(e) => handleInputChange('encryptionPassphrase', e.target.value)}
                     placeholder="Enter passphrase..."
-                    className="w-full px-3 py-2 pr-10 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassphrase(!showPassphrase)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-900"
                   >
                     {showPassphrase ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="text-xs text-gray-600 mt-1">
                   <Lock className="h-3 w-3 inline mr-1" />
                   This note will be encrypted locally before saving
                 </p>
@@ -285,12 +285,12 @@ export default function NewNotePage() {
 
           {/* Content Editor */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Content
             </label>
-            <div className="border border-input rounded-md">
-              <div className="border-b border-input p-2 bg-muted/50">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="border border-gray-300 rounded-md">
+              <div className="border-b border-gray-300 p-2 bg-muted/50">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
                   <span>Rich text editor will be integrated here</span>
                   <div className="flex gap-1 ml-auto">
                     <button className="p-1 hover:bg-muted rounded">B</button>

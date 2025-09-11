@@ -26,7 +26,7 @@ export default function ForgotPasswordPage() {
         <form className="space-y-4" onSubmit={onSubmit}>
           <label className="block text-sm">
             Email
-            <input className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input className="mt-1 block w-full rounded-md border border-gray-300 bg-background px-3 py-2" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
           {error && <p className="text-sm text-destructive">{error}</p>}
           {sent && <p className="text-sm text-emerald-600">Check your email for a reset link.</p>}
