@@ -16,7 +16,6 @@ import {
   FolderOpen,
   BookOpen
 } from 'lucide-react';
-import Link from 'next/link';
 
 interface ArchivedItem {
   id: string;
