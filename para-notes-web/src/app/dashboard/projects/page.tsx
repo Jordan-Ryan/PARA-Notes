@@ -6,12 +6,9 @@ import { Button } from '@/components/ui/button';
 import { 
   Plus, 
   Search, 
-  Filter, 
   Calendar,
   Clock,
   CheckCircle,
-  Circle,
-  MoreVertical,
   Edit,
   Trash2,
   Archive,
