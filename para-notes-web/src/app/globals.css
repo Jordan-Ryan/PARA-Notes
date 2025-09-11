@@ -124,7 +124,7 @@
 
   /* Modern card styles */
   .card-modern {
-    @apply bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
+    @apply bg-white border border-border rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
   }
 
   .card-interactive {
@@ -159,7 +159,7 @@
 
   /* Modern sidebar styles */
   .sidebar-modern {
-    @apply bg-card border-r border-border h-full w-64 flex flex-col;
+    @apply bg-white border-r border-border h-full w-64 flex flex-col;
   }
 
   .sidebar-item {
@@ -172,7 +172,7 @@
 
   /* Modern navigation styles */
   .nav-modern {
-    @apply flex items-center justify-between h-16 px-4 border-b border-border bg-card;
+    @apply flex items-center justify-between h-16 px-4 border-b border-border bg-white;
   }
 
   /* Modern search styles */
@@ -361,7 +361,7 @@
 
   /* Desktop-specific card styles */
   .card-desktop {
-    @apply bg-card border rounded-lg shadow-sm hover:shadow-md transition-shadow;
+    @apply bg-white border rounded-lg shadow-sm hover:shadow-md transition-shadow;
   }
 
   .card-desktop-interactive {

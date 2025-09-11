@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidebar */}
       <div
         className={cn(
-          'fixed left-0 top-0 z-50 h-full w-72 transform bg-card/95 backdrop-blur-xl border-r border-border transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0',
+          'fixed left-0 top-0 z-50 h-full w-72 transform bg-white/95 backdrop-blur-xl border-r border-border transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0',
           isOpen ? 'translate-x-0' : '-translate-x-full',
           className
         )}

@@ -149,7 +149,7 @@ export default function NewNotePage() {
         </div>
 
         {/* Note Form */}
-        <div className="bg-card border rounded-lg p-6 space-y-6">
+        <div className="bg-white border rounded-lg p-6 space-y-6">
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">

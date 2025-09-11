@@ -75,7 +75,7 @@ export default function SettingsPage() {
 
           {/* Content */}
           <div className="lg:col-span-3">
-            <div className="bg-card border rounded-lg p-6">
+            <div className="bg-white border rounded-lg p-6">
               {activeTab === 'profile' && (
                 <div className="space-y-6">
                   <div>

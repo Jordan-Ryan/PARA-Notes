@@ -193,7 +193,7 @@ export default function NotesPage() {
             {filteredNotes.map((note) => (
               <div
                 key={note.id}
-                className={`bg-card border rounded-lg p-6 hover:shadow-md transition-shadow ${
+                className={`bg-white border rounded-lg p-6 hover:shadow-md transition-shadow ${
                   viewMode === 'list' ? 'flex items-center justify-between' : ''
                 }`}
               >

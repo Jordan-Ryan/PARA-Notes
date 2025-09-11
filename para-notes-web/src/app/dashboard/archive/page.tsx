@@ -214,7 +214,7 @@ export default function ArchivePage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total</p>
@@ -224,7 +224,7 @@ export default function ArchivePage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Notes</p>
@@ -234,7 +234,7 @@ export default function ArchivePage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Projects</p>
@@ -244,7 +244,7 @@ export default function ArchivePage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Areas</p>
@@ -254,7 +254,7 @@ export default function ArchivePage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Resources</p>
@@ -309,7 +309,7 @@ export default function ArchivePage() {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className={`bg-card border rounded-lg p-6 hover:shadow-md transition-shadow ${
+                className={`bg-white border rounded-lg p-6 hover:shadow-md transition-shadow ${
                   viewMode === 'list' ? 'flex items-center justify-between' : ''
                 }`}
               >

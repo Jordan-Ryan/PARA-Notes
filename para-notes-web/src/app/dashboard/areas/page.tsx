@@ -189,7 +189,7 @@ export default function AreasPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total Areas</p>
@@ -199,7 +199,7 @@ export default function AreasPage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Overdue Reviews</p>
@@ -209,7 +209,7 @@ export default function AreasPage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Due Soon</p>
@@ -219,7 +219,7 @@ export default function AreasPage() {
             </div>
           </div>
           
-          <div className="bg-card p-4 rounded-lg border">
+          <div className="bg-white p-4 rounded-lg border">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">On Track</p>
@@ -264,7 +264,7 @@ export default function AreasPage() {
               const daysUntil = getDaysUntilReview(area.nextReviewAt);
               
               return (
-                <div key={area.id} className="bg-card border rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div key={area.id} className="bg-white border rounded-lg p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">

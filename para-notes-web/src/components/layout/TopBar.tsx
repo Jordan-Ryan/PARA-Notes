@@ -19,7 +19,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-border bg-card/95 backdrop-blur-xl px-4 lg:px-6">
+    <header className="flex h-16 items-center justify-between border-b border-border bg-white/95 backdrop-blur-xl px-4 lg:px-6">
       <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
@@ -109,7 +109,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
 
       {/* Mobile Search Overlay */}
       {showSearch && (
-        <div className="lg:hidden absolute top-16 left-0 right-0 bg-card/95 backdrop-blur-xl border-b border-border p-4 z-50">
+        <div className="lg:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-border p-4 z-50">
           <form onSubmit={handleSearch}>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
