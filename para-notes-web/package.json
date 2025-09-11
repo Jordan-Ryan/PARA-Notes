@@ -29,7 +29,7 @@
     "supabase:status": "supabase status",
     "supabase:db:push": "supabase db push",
     "supabase:db:pull": "supabase db pull",
-    "supabase:gen:types": "supabase gen types typescript --local > src/types/database.ts",
+    "supabase:gen:types": "supabase gen types typescript --local > src/types/database.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
