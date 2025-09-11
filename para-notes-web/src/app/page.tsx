@@ -1,18 +1,17 @@
 import { AppShell } from '@/components/layout/AppShell';
 import { Button } from '@/components/ui/button';
 import { 
-  FileText, 
   FolderOpen, 
+  Target, 
   BookOpen, 
-  Archive,
-  Plus,
-  TrendingUp,
-  Clock,
-  CheckCircle,
-  Sparkles,
-  ArrowRight,
+  FileText, 
+  Plus, 
+  TrendingUp, 
   Calendar,
-  Target
+  CheckCircle,
+  Clock,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 
 export default function Home() {
@@ -51,8 +50,8 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 px-4">
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-6 group hover:scale-105">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/20">
-                  <FolderOpen className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <div className="p-3 rounded-xl bg-blue-100">
+                  <FolderOpen className="h-6 w-6 text-blue-600" />
                 </div>
                 <span className="text-2xl font-bold text-gray-900">12</span>
               </div>
@@ -62,8 +61,8 @@ export default function Home() {
             
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-6 group hover:scale-105">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-green-100 dark:bg-green-900/20">
-                  <Target className="h-6 w-6 text-green-600 dark:text-green-400" />
+                <div className="p-3 rounded-xl bg-green-100">
+                  <Target className="h-6 w-6 text-green-600" />
                 </div>
                 <span className="text-2xl font-bold text-gray-900">8</span>
               </div>
@@ -73,8 +72,8 @@ export default function Home() {
             
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-6 group hover:scale-105">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-yellow-100 dark:bg-yellow-900/20">
-                  <BookOpen className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+                <div className="p-3 rounded-xl bg-yellow-100">
+                  <BookOpen className="h-6 w-6 text-yellow-600" />
                 </div>
                 <span className="text-2xl font-bold text-gray-900">24</span>
               </div>
@@ -84,8 +83,8 @@ export default function Home() {
             
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-6 group hover:scale-105">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-gray-100 dark:bg-gray-900/20">
-                  <FileText className="h-6 w-6 text-gray-600 dark:text-gray-400" />
+                <div className="p-3 rounded-xl bg-gray-100">
+                  <FileText className="h-6 w-6 text-gray-600" />
                 </div>
                 <span className="text-2xl font-bold text-gray-900">156</span>
               </div>
@@ -97,32 +96,32 @@ export default function Home() {
           {/* Quick Actions */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4">
             <Button className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 h-32 flex-col space-y-3 cursor-pointer hover:border-blue-300 hover:-translate-y-0.5 group">
-              <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/20 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/30 transition-colors">
-                <Plus className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 rounded-xl bg-blue-100 group-hover:bg-blue-200 transition-colors">
+                <Plus className="h-6 w-6 text-blue-600" />
               </div>
               <span className="font-semibold text-gray-900">New Project</span>
               <span className="text-xs opacity-75 text-gray-600">Create a new project</span>
             </Button>
             
             <Button className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 h-32 flex-col space-y-3 cursor-pointer hover:border-green-300 hover:-translate-y-0.5 group">
-              <div className="p-3 rounded-xl bg-green-100 dark:bg-green-900/20 group-hover:bg-green-200 dark:group-hover:bg-green-900/30 transition-colors">
-                <Plus className="h-6 w-6 text-green-600 dark:text-green-400" />
+              <div className="p-3 rounded-xl bg-green-100 group-hover:bg-green-200 transition-colors">
+                <Plus className="h-6 w-6 text-green-600" />
               </div>
               <span className="font-semibold text-gray-900">New Area</span>
               <span className="text-xs opacity-75 text-gray-600">Define a new area</span>
             </Button>
             
             <Button className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 h-32 flex-col space-y-3 cursor-pointer hover:border-yellow-300 hover:-translate-y-0.5 group">
-              <div className="p-3 rounded-xl bg-yellow-100 dark:bg-yellow-900/20 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-900/30 transition-colors">
-                <Plus className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+              <div className="p-3 rounded-xl bg-yellow-100 group-hover:bg-yellow-200 transition-colors">
+                <Plus className="h-6 w-6 text-yellow-600" />
               </div>
               <span className="font-semibold text-gray-900">New Resource</span>
               <span className="text-xs opacity-75 text-gray-600">Add a resource</span>
             </Button>
             
             <Button className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 h-32 flex-col space-y-3 cursor-pointer hover:border-gray-300 hover:-translate-y-0.5 group">
-              <div className="p-3 rounded-xl bg-gray-100 dark:bg-gray-900/20 group-hover:bg-gray-200 dark:group-hover:bg-gray-900/30 transition-colors">
-                <Plus className="h-6 w-6 text-gray-600 dark:text-gray-400" />
+              <div className="p-3 rounded-xl bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                <Plus className="h-6 w-6 text-gray-600" />
               </div>
               <span className="font-semibold text-gray-900">New Note</span>
               <span className="text-xs opacity-75 text-gray-600">Create a note</span>
@@ -140,8 +139,8 @@ export default function Home() {
               </div>
               <div className="space-y-4">
                 <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="p-1 rounded-full bg-green-100 dark:bg-green-900/20 mt-0.5">
-                    <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  <div className="p-1 rounded-full bg-green-100 mt-0.5">
+                    <CheckCircle className="h-4 w-4 text-green-600" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900">Completed "Website Redesign" project</p>
@@ -149,8 +148,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="p-1 rounded-full bg-yellow-100 dark:bg-yellow-900/20 mt-0.5">
-                    <Clock className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
+                  <div className="p-1 rounded-full bg-yellow-100 mt-0.5">
+                    <Clock className="h-4 w-4 text-yellow-600" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900">Added new note to "Health & Fitness" area</p>
@@ -158,8 +157,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="p-1 rounded-full bg-blue-100 dark:bg-blue-900/20 mt-0.5">
-                    <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <div className="p-1 rounded-full bg-blue-100 mt-0.5">
+                    <FileText className="h-4 w-4 text-blue-600" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900">Created "Investment Strategies" resource</p>
@@ -182,7 +181,7 @@ export default function Home() {
                     <p className="text-sm font-medium text-gray-900">Q1 Report</p>
                     <p className="text-xs text-gray-600">Marketing Department</p>
                   </div>
-                  <span className="px-2 py-1 text-xs font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-full">
+                  <span className="px-2 py-1 text-xs font-medium text-red-600 bg-red-50 rounded-full">
                     Due in 2 days
                   </span>
                 </div>
@@ -191,7 +190,7 @@ export default function Home() {
                     <p className="text-sm font-medium text-gray-900">Team Meeting</p>
                     <p className="text-xs text-gray-600">Weekly Standup</p>
                   </div>
-                  <span className="px-2 py-1 text-xs font-medium text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 rounded-full">
+                  <span className="px-2 py-1 text-xs font-medium text-yellow-600 bg-yellow-50 rounded-full">
                     Due in 5 days
                   </span>
                 </div>
@@ -200,7 +199,7 @@ export default function Home() {
                     <p className="text-sm font-medium text-gray-900">Budget Review</p>
                     <p className="text-xs text-gray-600">Finance Team</p>
                   </div>
-                  <span className="px-2 py-1 text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 rounded-full">
+                  <span className="px-2 py-1 text-xs font-medium text-green-600 bg-green-50 rounded-full">
                     Due in 1 week
                   </span>
                 </div>
