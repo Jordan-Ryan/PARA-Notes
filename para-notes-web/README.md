@@ -1,286 +1,120 @@
-# PARA Notes - Next.js 14 Web Application
+# para-notes-web
 
-A modern, full-featured note-taking application organized around the PARA method (Projects, Areas, Resources, Archive) built with Next.js 14, TypeScript, and Supabase. This application provides both mobile and desktop experiences with a responsive design.
+Next.js application in this repo. `package.json` depends on `next` `15.5.3`, `react` `19.1.0`, and `react-dom` `19.1.0`. Styling uses Tailwind CSS `4` (`postcss.config.mjs` loads `@tailwindcss/postcss`). Data access code uses `@supabase/supabase-js` and `@supabase/ssr`.
 
-## 🚀 Features
+`src/constants/para.ts` defines the PARA categories Projects, Areas, Resources, and Archive.
 
-### Core PARA Organization
-- **Projects**: Things with a deadline and specific outcome
-- **Areas**: Standards you want to maintain over time  
-- **Resources**: Topics or themes of ongoing interest
-- **Archive**: Inactive items from the other categories
+## Setup
 
-### Rich Text Editing
-- **Modern Editor**: Powered by Tiptap for a smooth writing experience
-- **Rich Formatting**: Bold, italic, lists, links, and more
-- **Real-time Collaboration**: Multi-user editing support
-- **Markdown Support**: Import/export Markdown files
-- **Encryption**: Optional client-side encryption for sensitive notes
-
-### Desktop & Mobile Experience
-- **Responsive Design**: Optimized for both desktop and mobile devices
-- **Desktop Features**: 
-  - Persistent sidebar navigation
-  - Keyboard shortcuts (⌘K for search)
-  - Hover effects and animations
-  - Multi-column layouts
-  - Custom scrollbars
-- **Mobile Features**:
-  - Collapsible sidebar
-  - Touch-friendly interface
-  - Mobile-optimized forms
-
-### Advanced Features
-- **Real-time Sync**: Automatic synchronization with Supabase
-- **Offline Support**: Works offline with local storage and sync when online
-- **Search & Filtering**: Full-text search across all content
-- **Tags & Organization**: Flexible tagging system
-- **Settings & Preferences**: Comprehensive user settings
-- **Data Export/Import**: Backup and restore functionality
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS with custom PARA theme
-- **Database**: Supabase (PostgreSQL)
-- **State Management**: Zustand + TanStack Query
-- **UI Components**: Headless UI + Custom components
-- **Rich Text**: Tiptap
-- **Icons**: Lucide React
-- **Authentication**: Supabase Auth
-
-## 📋 Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-- Supabase account
-- Git
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd para-notes-web
-```
-
-### 2. Install Dependencies
+From this directory:
 
 ```bash
 npm install
-```
-
-### 3. Environment Setup
-
-Copy the environment template and fill in your values:
-
-```bash
 cp env.template .env.local
 ```
 
-Update `.env.local` with your Supabase credentials:
+There is no `engines` field and no `.nvmrc`.
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NODE_ENV=development
-ENCRYPTION_KEY=your_32_character_encryption_key_here
-```
+The home page and Supabase clients read `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. If either is missing or contains `placeholder`, `src/app/page.tsx` renders `SetupRequired` and `middleware.ts` skips the session check.
 
-### 4. Set up Supabase
+`NEXT_PUBLIC_APP_URL` is optional in code. `src/constants/config.ts` and `src/app/layout.tsx` use `http://localhost:3000` when it is unset.
 
-#### Option A: Local Development (Recommended)
+`env.template` also contains `SUPABASE_SERVICE_ROLE_KEY`, `ENCRYPTION_KEY`, `NEXT_PUBLIC_ANALYTICS_ID`, `SENTRY_DSN`, and `NODE_ENV=production`. Integration tests read `SUPABASE_SERVICE_ROLE_KEY`. `ENCRYPTION_KEY`, `NEXT_PUBLIC_ANALYTICS_ID`, and `SENTRY_DSN` are not referenced by TypeScript in this package. `src/lib/editor/crypto.ts` takes a passphrase argument and does not read `ENCRYPTION_KEY`.
 
-1. Install Supabase CLI:
-```bash
-npm install -g supabase
-```
+### Supabase CLI
 
-2. Start local Supabase:
+`npm run supabase:*` calls the `supabase` binary. It is not a dependency in `package.json`.
+
+`supabase/config.toml` sets API port `54321`, database port `54322`, Studio port `54323`, Inbucket port `54324`, Postgres major version `15`, and auth `site_url` `http://localhost:3000`. Storage `file_size_limit` in that file is `50MiB`. The attachments bucket insert in `supabase/migrations/20240102000002_storage_policies.sql` sets `file_size_limit` to `10485760`.
+
 ```bash
 npm run supabase:start
-```
-
-3. Run database migrations:
-```bash
 npm run supabase:db:push
-```
-
-4. Generate TypeScript types:
-```bash
 npm run supabase:gen:types
 ```
 
-#### Option B: Remote Supabase
+`supabase:gen:types` writes `src/types/database.ts`. `src/lib/supabase/types.ts` is a different file and is not the redirect target of that script.
 
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Run the SQL migrations from `supabase/migrations/` in your Supabase dashboard
-3. Update your environment variables with the remote credentials
+`supabase/seed.sql` is in the tree. `config.toml` has no `[db.seed]` section. `npm run supabase:reset` runs `supabase db reset`.
 
-### 5. Start Development Server
+Migration filenames and functions are listed in [../docs/STATE.md](../docs/STATE.md) and [supabase/README.md](supabase/README.md).
+
+## Run
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+That script is `next dev --turbopack`. Playwright starts the same command and uses `http://localhost:3000`.
 
-## 📁 Project Structure
-
-```
-src/
-├── app/                    # Next.js App Router
-│   ├── (auth)/            # Authentication pages
-│   ├── dashboard/         # Protected dashboard pages
-│   │   ├── notes/         # Notes management
-│   │   ├── projects/      # Projects management
-│   │   ├── areas/         # Areas management
-│   │   ├── resources/     # Resources management
-│   │   ├── archive/       # Archive management
-│   │   └── settings/      # User settings
-│   ├── api/               # API routes
-│   └── globals.css        # Global styles
-├── components/            # React components
-│   ├── ui/               # Reusable UI components
-│   ├── features/         # Feature-specific components
-│   └── layout/           # Layout components
-├── hooks/                # Custom React hooks
-├── lib/                  # Utilities and configurations
-│   ├── supabase/         # Supabase client setup
-│   ├── crypto/           # Encryption utilities
-│   ├── para/             # PARA-specific logic
-│   └── utils/            # General utilities
-├── stores/               # Zustand stores
-├── types/                # TypeScript type definitions
-└── constants/            # App constants
-```
-
-## 🎨 Design System
-
-### PARA Color Scheme
-- **Projects**: Blue (#0ea5e9) - Action-oriented, deadline-driven
-- **Areas**: Green (#22c55e) - Maintenance, ongoing standards
-- **Resources**: Yellow (#eab308) - Reference materials, learning
-- **Archive**: Gray (#64748b) - Completed, inactive items
-
-### Responsive Breakpoints
-- **Mobile**: < 640px
-- **Tablet**: 640px - 1024px  
-- **Desktop**: > 1024px
-
-### Typography
-- **Headings**: Inter Bold
-- **Body**: Inter Regular
-- **Code**: JetBrains Mono
-
-## 🔧 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
-- `npm run format` - Format code with Prettier
-- `npm run type-check` - Run TypeScript type checking
-- `npm run test` - Run all tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage
-- `npm run test:e2e` - Run end-to-end tests
-
-## 🧪 Testing
-
-The application includes comprehensive testing:
-
-- **Unit Tests**: Jest + Testing Library
-- **Integration Tests**: API and database testing
-- **Component Tests**: React component testing
-- **E2E Tests**: Playwright for full user flows
-- **Security Tests**: Authentication and authorization testing
-
-Run all tests:
-```bash
-npm run test:all
-```
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Connect your GitHub repository to Vercel
-2. Set environment variables in Vercel dashboard
-3. Deploy automatically on push to main branch
-
-### Manual Deployment
-
-1. Build the application:
 ```bash
 npm run build
-```
-
-2. Start the production server:
-```bash
 npm run start
 ```
 
-## 🔒 Security
+`vercel.json` sets `framework` to `nextjs`, `buildCommand` to `npm run build`, `installCommand` to `npm install`, `devCommand` to `npm run dev`, and `outputDirectory` to `.next`.
 
-- **Row Level Security (RLS)**: All database operations are secured
-- **JWT Authentication**: Secure user authentication
-- **Client-side Encryption**: Optional encryption for sensitive data
-- **Input Validation**: All inputs are validated and sanitized
-- **HTTPS**: Secure connections in production
+## Scripts
 
-## 📱 Mobile Support
+| Script | Command |
+| --- | --- |
+| `dev` | `next dev --turbopack` |
+| `build` | `next build --turbopack` |
+| `start` | `next start` |
+| `lint` | `eslint . --ext .ts,.tsx,.js,.jsx` |
+| `lint:fix` | `eslint . --ext .ts,.tsx,.js,.jsx --fix` |
+| `format` | `prettier --write .` |
+| `format:check` | `prettier --check .` |
+| `type-check` | `tsc --noEmit` |
+| `test` | `jest` |
+| `test:watch` | `jest --watch` |
+| `test:coverage` | `jest --coverage` |
+| `test:ci` | `jest --ci --coverage --watchAll=false` |
+| `test:unit` | `jest --testPathPattern=unit` |
+| `test:integration` | `jest --testPathPattern=integration` |
+| `test:component` | `jest --testPathPattern=component` |
+| `test:e2e` | `playwright test` |
+| `test:e2e:ui` | `playwright test --ui` |
+| `test:e2e:headed` | `playwright test --headed` |
+| `test:security` | `jest --testPathPattern=security` |
+| `test:all` | unit, then integration, then component, then e2e |
+| `supabase:start` | `supabase start` |
+| `supabase:stop` | `supabase stop` |
+| `supabase:reset` | `supabase db reset` |
+| `supabase:status` | `supabase status` |
+| `supabase:db:push` | `supabase db push` |
+| `supabase:db:pull` | `supabase db pull` |
+| `supabase:gen:types` | `supabase gen types typescript --local > src/types/database.ts` |
 
-The application is fully responsive and optimized for mobile devices:
+`jest.config.js` ignores `tests/e2e/` and `tests/security/`, so `npm test` does not run `tests/security/auth-bypass.test.ts`. `npm run test:all` does not call `test:security`. The same Jest config sets a global `coverageThreshold` of 80 for branches, functions, lines, and statements.
 
-- **Touch-friendly Interface**: Large touch targets and gestures
-- **Mobile Navigation**: Collapsible sidebar and bottom navigation
-- **Offline Support**: Works without internet connection
-- **Progressive Web App**: Installable on mobile devices
+## Source layout
 
-## 🎯 Desktop Features
+```
+src/app/                  App Router pages, layout, globals.css, AuthProvider
+src/components/ui/        button, sidebar, modal
+src/components/layout/    AppShell, TopBar
+src/components/features/  editor, sync, auth, guidance
+src/hooks/                useAuth, useGuidance
+src/lib/supabase/         browser client, server client, types.ts
+src/lib/editor/           Tiptap extensions, markdown, crypto, storage, collab, search
+src/lib/guidance/         classifier, rules, templates, reminders, analytics
+src/lib/sync/             engine, Dexie db, queue and storage adapters
+src/lib/utils/            cn, debounce, validation
+src/stores/               zustand auth, notes, para, sync stores
+src/types/
+src/constants/            config, para, routes
+middleware.ts
+supabase/                 config.toml, migrations, seed.sql
+tests/                    unit, component, integration, e2e, security
+```
 
-Enhanced desktop experience with:
+`tsconfig.json` maps `@/*` to `./src/*`.
 
-- **Keyboard Shortcuts**: ⌘K for search, ⌘N for new note
-- **Multi-window Support**: Open multiple notes simultaneously
-- **Drag & Drop**: Reorder items and upload files
-- **Hover Effects**: Rich interactive feedback
-- **Custom Scrollbars**: Styled scrollbars for better UX
+## Routes in the App Router
 
-## 🤝 Contributing
+Pages on disk use these paths: `/`, `/login`, `/signup`, `/forgot-password`, `/reset-password`, `/dashboard/notes`, `/dashboard/notes/new`, `/dashboard/projects`, `/dashboard/areas`, `/dashboard/resources`, `/dashboard/archive`, `/dashboard/settings`.
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+`next.config.ts` redirects `/dashboard` to `/` with `permanent: true`. `src/constants/routes.ts` and `middleware.ts` use `/notes`, `/projects`, `/areas`, `/resources`, and `/archive` instead of the `/dashboard/...` paths. There is no `src/app/api` directory. See [../docs/STATE.md](../docs/STATE.md).
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Tiago Forte](https://fortelabs.co/) for creating the PARA method
-- [Supabase](https://supabase.com/) for the backend infrastructure
-- [Vercel](https://vercel.com/) for hosting and deployment
-- [Tailwind CSS](https://tailwindcss.com/) for the design system
-- [Tiptap](https://tiptap.dev/) for the rich text editor
-
-## 📞 Support
-
-If you have any questions or need help, please:
-
-1. Check the [documentation](docs/)
-2. Search [existing issues](https://github.com/your-repo/issues)
-3. Create a [new issue](https://github.com/your-repo/issues/new)
-
----
-
-**Built with ❤️ for productivity enthusiasts**
+`dashboard/notes/page.tsx`, `projects/page.tsx`, `areas/page.tsx`, `resources/page.tsx`, and `archive/page.tsx` each include the comment `Mock data for now`. `dashboard/notes/new/page.tsx` uses a textarea. `src/components/features/editor/NoteEditor.tsx` is the Tiptap component, and no page under `src/app` imports it.

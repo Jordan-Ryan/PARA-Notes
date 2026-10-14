@@ -1,269 +1,116 @@
-# PARA Notes Mobile
+# para-notes-mobile
 
-A React Native Expo mobile application for organizing your life with the PARA method (Projects, Areas, Resources, Archive).
+Expo application in this repo. `package.json` depends on `expo` `~54.0.1`, `react-native` `0.81.4`, and `react` `19.1.0`. `"main"` is `index.ts`, which calls `registerRootComponent` with `App.tsx`.
 
-## Features
+`app.json` name is `PARA Notes`, slug `para-notes-mobile`, version `1.0.0`, scheme `para-notes`, iOS bundle identifier and Android package `com.paranotes.mobile`.
 
-- **PARA Organization System**: Organize your notes into Projects, Areas, Resources, and Archive
-- **Cross-Platform**: Built with React Native and Expo for iOS and Android
-- **TypeScript**: Full TypeScript support with strict type checking
-- **Offline Support**: Works offline with local storage and sync capabilities
-- **Secure**: End-to-end encryption for sensitive notes
-- **Modern UI**: Clean, intuitive interface with dark/light theme support
-- **Real-time Sync**: Automatic synchronization with Supabase backend
+## Setup
 
-## Tech Stack
+From this directory:
 
-- **React Native** with Expo
-- **TypeScript** for type safety
-- **React Navigation** for navigation
-- **Supabase** for backend and authentication
-- **Zustand** for state management
-- **TanStack Query** for data fetching and caching
-- **Expo Secure Store** for secure key storage
-- **React Native MMKV** for local storage
-- **Jest** for testing
+```bash
+npm install
+cp env.example .env
+```
 
-## Prerequisites
+There is no `engines` field and no `.nvmrc`. `package.json` does not depend on `expo` or `eas-cli` as global packages. The `start`, `android`, `ios`, and `web` scripts call the local `expo` binary. The `build:*` and `submit:*` scripts call `eas`.
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Expo CLI (`npm install -g @expo/cli`)
-- EAS CLI (`npm install -g eas-cli`)
-- iOS Simulator (for iOS development)
-- Android Studio (for Android development)
+`src/constants/config.ts` reads:
 
-## Installation
+- `EXPO_PUBLIC_SUPABASE_URL`
+- `EXPO_PUBLIC_SUPABASE_ANON_KEY`
+- `EXPO_PUBLIC_APP_ENV` (default `development`)
+- `EXPO_PUBLIC_API_URL` (default `https://api.paranotes.com`)
+- `EXPO_PUBLIC_SCHEME` (default `para-notes`)
+- `EXPO_PUBLIC_ENCRYPTION_KEY` (default `''`)
+- `EXPO_PUBLIC_SYNC_INTERVAL` (default `300000`)
+- `EXPO_PUBLIC_OFFLINE_MODE` (default is off unless the value is the string `true`)
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd para-notes-mobile
-   ```
+Those names match `env.example`. `src/lib/supabase/client.ts` passes `config.supabase.url` and `config.supabase.anonKey` to `createClient`.
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+Database SQL for this repo is under `../para-notes-web/supabase/`.
 
-3. **Set up environment variables**
-   ```bash
-   cp env.example .env
-   ```
-   
-   Edit `.env` with your configuration:
-   ```env
-   EXPO_PUBLIC_SUPABASE_URL=your_supabase_url_here
-   EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
-   EXPO_PUBLIC_APP_ENV=development
-   EXPO_PUBLIC_API_URL=https://api.paranotes.com
-   EXPO_PUBLIC_SCHEME=para-notes
-   EXPO_PUBLIC_ENCRYPTION_KEY=your_encryption_key_here
-   EXPO_PUBLIC_SYNC_INTERVAL=300000
-   EXPO_PUBLIC_OFFLINE_MODE=true
-   ```
+`app.json` `extra.eas.projectId` is `your-project-id-here`. There is no `ios/` directory and no `android/` directory.
 
-4. **Set up Supabase**
-   - Create a new Supabase project
-   - Run the database migrations (shared with web app)
-   - Update your environment variables with Supabase credentials
+## Run
 
-## Development
-
-### Start the development server
 ```bash
 npm start
 ```
 
-### Run on specific platforms
+That script is `expo start`.
+
 ```bash
-# iOS Simulator
 npm run ios
-
-# Android Emulator
 npm run android
-
-# Web browser
 npm run web
 ```
 
-### Run tests
-```bash
-# Run all tests
-npm test
+Those are `expo start --ios`, `expo start --android`, and `expo start --web`.
 
-# Run tests in watch mode
-npm run test:watch
+## Scripts
 
-# Run tests with coverage
-npm run test:coverage
-```
+| Script | Command |
+| --- | --- |
+| `start` | `expo start` |
+| `android` | `expo start --android` |
+| `ios` | `expo start --ios` |
+| `web` | `expo start --web` |
+| `test` | `jest --config jest.config.mobile.cjs` |
+| `test:watch` | Jest watch with `jest.config.mobile.cjs` |
+| `test:coverage` | Jest coverage with `jest.config.mobile.cjs` |
+| `test:ci` | Jest CI coverage with `jest.config.mobile.cjs` |
+| `test:unit` | Jest `--testPathPattern=unit` with `jest.config.mobile.cjs` |
+| `test:integration` | `jest --testPathPattern=integration` |
+| `test:component` | `jest --testPathPattern=component` |
+| `test:e2e` | `detox test` |
+| `test:e2e:build` | `detox build` |
+| `test:security` | `jest --testPathPattern=security` |
+| `test:all` | unit, then integration, then component |
+| `lint` | `eslint . --ext .ts,.tsx` |
+| `lint:fix` | `eslint . --ext .ts,.tsx --fix` |
+| `type-check` | `tsc --noEmit` |
+| `build:android` | `eas build --platform android` |
+| `build:ios` | `eas build --platform ios` |
+| `build:all` | `eas build --platform all` |
+| `submit:android` | `eas submit --platform android` |
+| `submit:ios` | `eas submit --platform ios` |
 
-### Linting and type checking
-```bash
-# Run ESLint
-npm run lint
+`test:integration`, `test:component`, and `test:security` do not pass `--config jest.config.mobile.cjs`. This package has no `tests/integration`, `tests/component`, or `tests/security` directory. `test:all` does not run `test:e2e`.
 
-# Fix ESLint issues
-npm run lint:fix
+`jest.config.mobile.cjs` is the config used by `npm test`. `jest.config.js` and `jest.config.mobile.js` are also in this directory. `jest.config.mobile.cjs` does not set `coverageThreshold`.
 
-# Type check
-npm run type-check
-```
+`.detoxrc.js` sets the Jest config path to `e2e/jest.config.js` and binary paths under `ios/build` and `android/app/build`. The Jest file in the tree is `tests/e2e/jest.config.js`. Its `testMatch` is `<rootDir>/e2e/**/*.test.js` with `rootDir` `..`. The test files are `tests/e2e/auth.test.js` and `tests/e2e/notes.test.js`.
 
-## Building for Production
+`eas.json` profiles are `development`, `preview`, and `production`. Android build type is `apk` for development and preview, and `aab` for production. `submit.production` is an empty object.
 
-### Set up EAS
-```bash
-eas login
-eas build:configure
-```
-
-### Build for platforms
-```bash
-# Android
-npm run build:android
-
-# iOS
-npm run build:ios
-
-# Both platforms
-npm run build:all
-```
-
-### Submit to app stores
-```bash
-# Android Play Store
-npm run submit:android
-
-# iOS App Store
-npm run submit:ios
-```
-
-## Project Structure
+## Source layout
 
 ```
-src/
-├── components/           # Reusable UI components
-│   ├── ui/              # Basic UI components (Button, Modal, etc.)
-│   └── features/        # Feature-specific components
-├── screens/             # Screen components
-│   ├── auth/            # Authentication screens
-│   ├── notes/           # Note-related screens
-│   ├── para/            # PARA category screens
-│   └── dashboard/       # Dashboard screens
-├── navigation/          # Navigation configuration
-├── hooks/               # Custom React hooks
-├── lib/                 # Utility libraries
-│   ├── supabase/        # Supabase configuration
-│   ├── crypto/          # Encryption utilities
-│   ├── para/            # PARA logic
-│   ├── sync/            # Sync utilities
-│   └── storage/         # Storage utilities
-├── stores/              # Zustand stores
-├── types/               # TypeScript type definitions
-├── constants/           # App constants and configuration
-└── assets/              # Images, fonts, and other assets
+App.tsx
+index.ts
+app.json
+eas.json
+assets/                 icon, splash, adaptive icon, favicon
+src/components/ui/      Button, Modal, FloatingActionButton
+src/components/features editor, sync, guidance
+src/screens/            auth, dashboard/HomeScreen, notes, para, settings, profile
+src/navigation/         AppNavigator, AuthNavigator, MainNavigator
+src/hooks/              useAuth, useGuidance, useSupabase
+src/lib/guidance/
+src/lib/sync/
+src/lib/supabase/client.ts
+src/lib/utils/validation.ts
+src/stores/notesStore.ts
+src/constants/          config.ts, para.ts, theme.ts
+src/types/
+tests/unit/
+tests/e2e/
+tests/simple.test.ts
 ```
 
-## Key Features Implementation
+`tsconfig.json` maps `@/*` to `./src/*` and also maps `@components`, `@screens`, `@hooks`, `@lib`, `@stores`, `@types`, `@constants`, and `@assets`.
 
-### Authentication
-- Supabase Auth integration
-- Secure token storage
-- Automatic session management
-- Password reset functionality
+Tabs registered in `src/navigation/MainNavigator.tsx` are Home, Projects, Areas, Resources, and Archive. The same stack registers NoteEditor, NoteSearch, Settings, and Profile.
 
-### PARA System
-- **Projects**: Outcomes with deadlines
-- **Areas**: Standards to maintain
-- **Resources**: Topics to reference
-- **Archive**: Inactive items
-
-### Data Management
-- Offline-first architecture
-- Real-time synchronization
-- Conflict resolution
-- Data encryption
-
-### UI/UX
-- Responsive design
-- Dark/light theme support
-- Smooth animations
-- Intuitive navigation
-
-## Configuration
-
-### App Configuration
-Edit `src/constants/config.ts` to modify app settings:
-
-```typescript
-export const config = {
-  app: {
-    name: 'PARA Notes',
-    version: '1.0.0',
-    environment: 'development',
-  },
-  // ... other configuration
-};
-```
-
-### Theme Configuration
-Edit `src/constants/theme.ts` to customize the app's appearance:
-
-```typescript
-export const colors = {
-  primary: '#007AFF',
-  secondary: '#FF6B6B',
-  // ... other colors
-};
-```
-
-## Testing
-
-The project includes comprehensive testing setup:
-
-- **Unit Tests**: Component and utility function tests
-- **Integration Tests**: Screen and navigation tests
-- **E2E Tests**: Full user flow tests (coming soon)
-
-### Writing Tests
-
-```typescript
-import { render, screen } from '@/tests/utils/test-utils';
-import { Button } from '@/components/ui';
-
-describe('Button', () => {
-  it('renders correctly', () => {
-    render(<Button title="Test" onPress={() => {}} />);
-    expect(screen.getByText('Test')).toBeTruthy();
-  });
-});
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-For support, email support@paranotes.com or join our Discord community.
-
-## Roadmap
-
-- [ ] Push notifications
-- [ ] Advanced search and filtering
-- [ ] Note templates
-- [ ] Collaboration features
-- [ ] Advanced analytics
-- [ ] Widget support
-- [ ] Apple Watch app
-- [ ] Desktop app integration
+`src/screens/notes/NoteEditorScreen.tsx` uses `TextInput`. `MobileNoteEditor.tsx` is not imported by that screen. Sync components under `src/components/features/sync/` import `@/stores/syncStore`. The only store file is `src/stores/notesStore.ts`.
